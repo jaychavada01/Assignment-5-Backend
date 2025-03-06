@@ -38,7 +38,7 @@ const User = sequelize.define(
     },
     forgetPasswordToken: {
       type: DataTypes.STRING,
-      allowNull: true, // Store 
+      allowNull: true, // Store
     },
     forgetPasswordTokenExpiry: {
       type: DataTypes.DATE,
@@ -84,7 +84,11 @@ const User = sequelize.define(
       type: DataTypes.JSON, // Store blacklisted tokens as an array of strings
       allowNull: true,
       defaultValue: [],
-    }
+    },
+    stripeCustomerId: { // stripe implementation
+      type: DataTypes.STRING,
+      allowNull: true, // Allow null initially, but will be set after Stripe customer creation
+    },
   },
   {
     timestamps: true,

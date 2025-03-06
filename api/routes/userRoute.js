@@ -1,6 +1,7 @@
 const express = require("express");
 const authController = require("../controller/authController.js");
 const awsController = require("../controller/awsController.js");
+const stripeController = require("../controller/stripeController.js");
 const { authenticate } = require("../middleware/auth.js");
 const upload = require("../middleware/upload.js");
 
@@ -24,5 +25,8 @@ router.post("/forgot-password", authController.forgetPassword);
 router.post("/reset-password", authController.resetPassword);
 
 router.get("/user-activity", authenticate, authController.getUserActivity);
+
+// ? stripe customer creation
+router.post("/stripe-customer", authenticate, stripeController.createCustomer)
 
 module.exports = router;

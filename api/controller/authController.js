@@ -18,7 +18,6 @@ const {
 
 const { calculateUserActivity } = require("../utils/activityCalculator");
 const sendPushNotification = require("../utils/notification");
-const { uploadFileToS3 } = require("../utils/s3");
 
 const generateToken = async (user) => {
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
@@ -426,8 +425,6 @@ const getUserActivity = async (req, res) => {
       .json({ message: "Failed to retrieve user activity" });
   }
 };
-
-
 
 module.exports = {
   generateToken,
