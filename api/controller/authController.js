@@ -18,6 +18,7 @@ const {
 
 const { calculateUserActivity } = require("../utils/activityCalculator");
 const sendPushNotification = require("../utils/notification");
+const { uploadFileToS3 } = require("../utils/s3");
 
 const generateToken = async (user) => {
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
@@ -426,6 +427,8 @@ const getUserActivity = async (req, res) => {
   }
 };
 
+
+
 module.exports = {
   generateToken,
   signUp,
@@ -435,5 +438,5 @@ module.exports = {
   forgetPassword,
   resetPassword,
   changePassword,
-  getUserActivity,
+  getUserActivity
 };

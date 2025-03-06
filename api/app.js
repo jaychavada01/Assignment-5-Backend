@@ -3,12 +3,13 @@ const path = require("path");
 
 const app = express();
 
-const authRoute = require("./routes/authRoute.js");
+const userRoute = require("./routes/userRoute.js");
 
 const { STATUS_CODES } = require("./config/constant");
 const { sequelize } = require("./config/database.js");
 
 require("dotenv").config({ path: `${process.cwd()}/api/.env` });
+;
 
 const PORT = process.env.PORT || 3000;
 
@@ -20,7 +21,7 @@ app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //? Routes
-app.use("/users", authRoute);
+app.use("/users", userRoute);
 
 app.use("*", (req, res) => {
   res.status(STATUS_CODES.BAD_REQUEST).json({ message: "Invalid route!" });

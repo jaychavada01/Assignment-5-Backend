@@ -2,7 +2,7 @@
 
 ## 📌 Project Overview
 
-This project is a backend application built with **Node.js**, **Express.js**, and **Sequelize** (ORM for PostgreSQL). It includes user authentication, JWT-based authorization, a referral and rewards system, activity tracking, and achievements.
+This project is a backend application built with **Node.js**, **Express.js**, and **Sequelize** (ORM for PostgreSQL). It includes user authentication, JWT-based authorization, a referral and rewards system, activity tracking, achievements, and AWS integrations for S3 file storage and SQS messaging.
 
 ---
 
@@ -15,24 +15,35 @@ Assignment/
 │  ├─ .env
 │  ├─ app.js
 │  ├─ config/
+│  │  ├─ aws.js
 │  │  ├─ constant.js
-│  │  └─ database.js
+│  │  ├─ database.js
+│  │  ├─ firebase.js
+│  │  └─ serviceAccountKey.json
 │  ├─ controller/
-│  │  └─ authController.js
+│  │  ├─ authController.js
+│  │  └─ awsController.js
+│  ├─ helpers/
+│  │  └─ sqsworker.js
 │  ├─ middleware/
 │  │  ├─ auth.js
 │  │  └─ upload.js
 │  ├─ models/
 │  │  ├─ activity.js
+│  │  ├─ notificationToken.js
 │  │  └─ user.js
 │  ├─ package-lock.json
 │  ├─ package.json
 │  ├─ routes/
-│  │  └─ authRoute.js
+│  │  └─ userRoute.js
 │  ├─ uploads/
 │  │  ├─ (image files)
 │  └─ utils/
-│     └─ mailer.js
+│     ├─ activityCalculator.js
+│     ├─ mailer.js
+│     ├─ notification.js
+│     ├─ s3.js
+│     └─ sqs.js
 └─ readme.MD
 ```
 
@@ -43,8 +54,8 @@ Assignment/
 ### 1️⃣ Clone the Repository
 
 ```sh
-git clone https://github.com/jaychavada01/Assignment-5-Backend-Project.git
-cd Assignment/api
+git clone https://github.com/jaychavada01/Assignment-5-Backend.git
+cd api
 ```
 
 ### 2️⃣ Install Dependencies
@@ -65,6 +76,11 @@ MAILTRAP_HOST=smtp.mailtrap.io
 MAILTRAP_PORT=2525
 MAILTRAP_USER=your_mailtrap_username
 MAILTRAP_PASS=your_mailtrap_password
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+AWS_REGION=your_aws_region
+S3_BUCKET_NAME=your_s3_bucket_name
+SQS_QUEUE_URL=your_sqs_queue_url
 ```
 
 ---
@@ -78,7 +94,9 @@ MAILTRAP_PASS=your_mailtrap_password
 ✅ **Profile Completion Rewards** (Users get 30 coins for 100% completion)  
 ✅ **Activity Tracking** (Logs user activities like login, referrals, profile updates)  
 ✅ **Achievements System** (Users unlock rewards based on activities)  
-✅ **Forgot Password & Reset Password** (Secure password recovery)
+✅ **Forgot Password & Reset Password** (Secure password recovery)  
+✅ **AWS S3 Integration** (File uploads & storage)  
+✅ **AWS SQS Integration** (Message queuing for notifications & tasks)  
 
 ---
 
@@ -94,10 +112,17 @@ MAILTRAP_PASS=your_mailtrap_password
 | POST   | `/users/reset-password`  | Reset password (Authenticated)                                 | ✅ Yes        |
 | POST   | `/users/forgot-password` | Send password reset email                                      | ❌ No         |
 
+### **AWS Integrations**
+
+| Method | Endpoint             | Description                                  | Auth Required |
+| ------ | -------------------- | -------------------------------------------- | ------------- |
+| POST   | `/upload`            | Upload files to AWS S3                       | ✅ Yes        |
+| GET    | `/files/:filename`   | Get file from S3 bucket                      | ✅ Yes        |
+| POST   | `/sqs/send`          | Send a message to AWS SQS queue              | ✅ Yes        |
 
 ---
 
-## 🎖️ Achievements & Rewards
+## 🏆 Achievements & Rewards
 
 | Achievement          | Requirement                   | Reward |
 | -------------------- | ----------------------------- | ------ |
@@ -114,7 +139,9 @@ MAILTRAP_PASS=your_mailtrap_password
 - **JWT (JSON Web Token)** – Authentication
 - **Bcrypt.js** – Password Hashing
 - **Nodemailer & Mailtrap** – Email Notifications
-- **ValidatorJs** - Validation Credentials
+- **ValidatorJs** – Validation Credentials
+- **AWS S3** – File Storage
+- **AWS SQS** – Message Queue Service
 
 ---
 
@@ -139,3 +166,8 @@ MAILTRAP_PASS=your_mailtrap_password
 - Users unlock **Early Bird** if they log in for 3 consecutive days.
 - Users unlock **Networker** if they refer 5 friends.
 - Users unlock **Verified Profile** after completing 100% of their profile.
+
+### 5️⃣ **AWS S3 & SQS Integration**
+
+- Users can upload files to **AWS S3**.
+- Messages for events (e.g., notifications) are sent to **AWS SQS** for processing.

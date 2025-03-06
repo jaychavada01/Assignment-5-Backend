@@ -8,6 +8,9 @@ if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
+// Storage Configuration (Memory)
+const AWS_Storage = multer.memoryStorage(); // Store file in memory before uploading to S3
+
 // Storage Configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -29,7 +32,7 @@ const fileFilter = (req, file, cb) => {
 
 // Multer Configuration
 const upload = multer({
-  storage: storage,
+  storage: storage || AWS_Storage,
   limits: { fileSize: 7 * 1024 * 1024 }, // 7MB file size limit
   fileFilter: fileFilter,
 });
