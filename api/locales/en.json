@@ -1,0 +1,46 @@
+{
+  "auth": {
+    "signup_success": "User registered successfully",
+    "login_success": "Login successful",
+    "logout_success": "Logout successful",
+    "logout_error": "Error logging out!",
+    "user_already": "User already Exist!",
+    "invalid_credentials": "Invalid credentials",
+    "profile_update_success": "Profile updated successfully",
+    "user_not_found": "User not found",
+    "password_reset_success": "Password reset email sent successfully!",
+    "pass_reset": "Password reset successful! You can now log in with your new password.",
+    "password_change_success": "Password changed successfully",
+    "password_change_relogin": "Password changed successfully! Please log in again.",
+    "Invalid_Route": "Invalid route",
+    "Invalid_referral": "Invalid referral code!",
+    "Invalid_Token": "Invalid or expired token.",
+    "Incorrect_old_pass":"Incorrect old password!",
+    "user_activity":"User activity retrieved successfully",
+    "unauthorized": "Unauthorized, token missing!",
+    "blacklisted_token":"Token is blacklisted!",
+    "invalid_token": "Invalid or expired token!"
+  },
+  "aws": {
+    "upload_success": "File uploaded successfully",
+    "upload_failed": "Failed to upload File!",
+    "no_fileupload": "No file uploaded!",
+    "sqs_message_sent": "Message sent to SQS successfully",
+    "sqs_message_failed": "Failed to send message to SQS",
+    "message_body": "Message body is required"
+  },
+  "payment": {
+    "customer_creation_success": "Stripe customer created successfully",
+    "stripe_customer_exist": "User already has a Stripe customer ID",
+    "stripe_customer_notfound": "User not found or missing Stripe Customer ID!",
+    "customer_creation_failed": "Failed to create Stripe customer",
+    "card_add_success": "Card added successfully",
+    "card_add_failed": "Failed to add card",
+    "no_card":"No saved card found for this user!",
+    "payment_success": "Payment processed successfully",
+    "payment_failed": "Payment failed"
+  },
+  "common": {
+    "server_error": "Something went wrong, please try again later"
+  }
+}

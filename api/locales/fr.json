@@ -1,0 +1,46 @@
+{
+  "auth": {
+    "signup_success": "Utilisateur enregistré avec succès",
+    "login_success": "Connexion réussie",
+    "logout_success": "Déconnexion réussie",
+    "logout_error": "Erreur lors de la déconnexion!",
+    "user_already": "L'utilisateur existe déjà!",
+    "invalid_credentials": "Identifiants invalides",
+    "profile_update_success": "Profil mis à jour avec succès",
+    "user_not_found": "Utilisateur non trouvé",
+    "password_reset_success": "E-mail de réinitialisation du mot de passe envoyé avec succès!",
+    "pass_reset": "Réinitialisation du mot de passe réussie! Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
+    "password_change_success": "Mot de passe changé avec succès",
+    "password_change_relogin": "Mot de passe changé avec succès! Veuillez vous reconnecter.",
+    "Invalid_Route": "Route invalide",
+    "Invalid_referral": "Code de parrainage invalide!",
+    "Invalid_Token": "Jeton invalide ou expiré.",
+    "Incorrect_old_pass": "Ancien mot de passe incorrect!",
+    "user_activity": "Activité de l'utilisateur récupérée avec succès",
+    "unauthorized": "Non autorisé, jeton manquant!",
+    "blacklisted_token": "Le jeton est sur liste noire!",
+    "invalid_token": "Jeton invalide ou expiré!"
+  },
+  "aws": {
+    "upload_success": "Fichier téléchargé avec succès",
+    "upload_failed": "Échec du téléchargement du fichier!",
+    "no_fileupload": "Aucun fichier téléchargé!",
+    "sqs_message_sent": "Message envoyé à SQS avec succès",
+    "sqs_message_failed": "Échec de l'envoi du message à SQS",
+    "message_body": "Le corps du message est requis"
+  },
+  "payment": {
+    "customer_creation_success": "Client Stripe créé avec succès",
+    "stripe_customer_exist": "L'utilisateur a déjà un identifiant client Stripe",
+    "stripe_customer_notfound": "Utilisateur non trouvé ou identifiant client Stripe manquant!",
+    "customer_creation_failed": "Échec de la création du client Stripe",
+    "card_add_success": "Carte ajoutée avec succès",
+    "card_add_failed": "Échec de l'ajout de la carte",
+    "no_card": "Aucune carte enregistrée trouvée pour cet utilisateur!",
+    "payment_success": "Paiement traité avec succès",
+    "payment_failed": "Échec du paiement"
+  },
+  "common": {
+    "server_error": "Une erreur s'est produite, veuillez réessayer plus tard"
+  }
+}

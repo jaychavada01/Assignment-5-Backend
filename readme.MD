@@ -2,7 +2,7 @@
 
 ## 📌 Project Overview
 
-This project is a backend application built with **Node.js**, **Express.js**, and **Sequelize** (ORM for PostgreSQL). It includes user authentication, JWT-based authorization, a referral and rewards system, activity tracking, achievements, and AWS integrations for S3 file storage and SQS messaging.
+This project is a backend application built with **Node.js**, **Express.js**, and **Sequelize** (ORM for PostgreSQL). It includes user authentication, JWT-based authorization, a referral and rewards system, activity tracking, achievements, AWS integrations for S3 file storage and SQS messaging, and multilingual support.
 
 ---
 
@@ -25,10 +25,14 @@ Assignment/
 │  │  ├─ authController.js
 │  │  ├─ awsController.js
 │  │  └─ stripeController.js
-│  ├─ helpers/
-│  │  └─ sqsworker.js
+│  ├─ locales/
+│  │  ├─ de.json
+│  │  ├─ en.json
+│  │  ├─ fr.json
+│  │  └─ hi.json
 │  ├─ middleware/
 │  │  ├─ auth.js
+│  │  ├─ i18n.js
 │  │  └─ upload.js
 │  ├─ models/
 │  │  ├─ activity.js
@@ -40,35 +44,34 @@ Assignment/
 │  ├─ routes/
 │  │  ├─ paymentRoute.js
 │  │  └─ userRoute.js
-│  ├─ uploads/
-│  │  ├─ (image files)
-│  └─ utils/
+│  ├─ utils/
 │     ├─ activityCalculator.js
 │     ├─ mailer.js
 │     ├─ notification.js
 │     ├─ s3.js
 │     └─ sqs.js
 └─ readme.MD
+
 ```
 
 ---
 
 ## ⚙️ Installation & Setup
 
-### 1️⃣ Clone the Repository
+### 1. Clone the Repository
 
 ```sh
 git clone https://github.com/jaychavada01/Assignment-5-Backend.git
 cd api
 ```
 
-### 2️⃣ Install Dependencies
+### 2. Install Dependencies
 
 ```sh
 npm install
 ```
 
-### 3️⃣ Configure Environment Variables
+### 3. Configure Environment Variables
 
 Create a `.env` file in the `api/` directory and add the following values:
 
@@ -106,7 +109,20 @@ STRIPE_SECRET_KEY=your_key
 ✅ **Forgot Password & Reset Password** (Secure password recovery)  
 ✅ **AWS S3 Integration** (File uploads & storage)  
 ✅ **AWS SQS Integration** (Message queuing for notifications & tasks)  
-✅ **Stripe Payment Integration** (Card management & transactions)
+✅ **Stripe Payment Integration** (Card management & transactions)  
+✅ **Multilingual Support** (English, Hindi, French, German)
+
+---
+
+### **Multilingual Support**
+
+- The application supports multiple languages: **English (default), Hindi, French, and German**.
+- Language preference is detected from the request headers or defaults to English (`en`).
+- Translations are stored in `/locales/` directory.
+- Example usage in API response:
+  ```js
+  res.t("auth.signup_success"); // Retrieves translated message based on user's language preference
+  ```
 
 ---
 
@@ -123,13 +139,6 @@ STRIPE_SECRET_KEY=your_key
 | POST   | `/users/forgot-password` | Send password reset email.                                               | ❌ No         |
 | POST   | `/users/change-password` | Change password.                                                         | ✅ Yes        |
 
-### **Profile Update and User Activity**
-
-| Method | Endpoint               | Description                                                              | Auth Required |
-| ------ | ---------------------- | ------------------------------------------------------------------------ | ------------- |
-| PUT    | `/users/profile`       | Complete the user profile with profile pic and bio, for pic used multer. | ✅ Yes        |
-| POST   | `/users/user-activity` | Get all activities completed by the user.                                | ✅ Yes        |
-
 ### **AWS Integrations**
 
 | Method | Endpoint              | Description                     | Auth Required |
@@ -137,13 +146,34 @@ STRIPE_SECRET_KEY=your_key
 | POST   | `/users/upload-aws`   | Upload files to AWS S3          | ✅ Yes        |
 | POST   | `/users/send-message` | Send a message to AWS SQS queue | ✅ Yes        |
 
-### **Stripe Payments**
+---
 
-| Method | Endpoint                    | Description                          | Auth Required |
-| ------ | --------------------------- | ------------------------------------ | ------------- |
-| POST   | `/user/pay/stripe-customer` | Create a Stripe customer             | ✅ Yes        |
-| POST   | `/user/pay/add-card`        | Create a card for user               | ✅ Yes        |
-| GET    | `/user/pay/make-payment`    | Make payment with existing user card | ✅ Yes        |
+## 🚀 How It Works
+
+### 1. **User Authentication & Referral**
+
+- New users register and receive a unique **referral code**.
+- If a user signs up using a referral code, both referrer and referred user get **50 coins**.
+
+### 2. **Multilingual Support**
+
+- Users can receive API responses in **English, Hindi, French, or German**.
+- The system detects it from query `?lang='fr'` for new language
+
+### 3. **Daily Login Rewards**
+
+- Users receive **10 coins** every day they log in.
+- Logs are stored in the **Activity table**.
+
+### 4. **AWS S3 & SQS Integration**
+
+- Users can upload files to **AWS S3**.
+- Messages for events (e.g., notifications) are sent to **AWS SQS** for processing.
+
+### 5. **Stripe Payment Integration**
+
+- Users can add payment cards and make transactions.
+- Transaction details are stored securely.
 
 ---
 
@@ -157,37 +187,4 @@ STRIPE_SECRET_KEY=your_key
 - **AWS S3** – File Storage
 - **AWS SQS** – Message Queue Service
 - **Stripe** – Payment Processing
-
----
-
-## 🚀 How It Works
-
-### 1️⃣ **User Authentication & Referral**
-
-- New users register and receive a unique **referral code**.
-- If a user signs up using a referral code, both referrer and referred user get **50 coins**.
-
-### 2️⃣ **Daily Login Rewards**
-
-- Users receive **10 coins** every day they log in.
-- Logs are stored in the **Activity table**.
-
-### 3️⃣ **Profile Completion Rewards**
-
-- Users completing 100% of their profile get **30 coins**.
-
-### 4️⃣ **Achievements System**
-
-- Users unlock **Early Bird** if they log in for 3 consecutive days.
-- Users unlock **Networker** if they refer 5 friends.
-- Users unlock **Verified Profile** after completing 100% of their profile.
-
-### 5️⃣ **AWS S3 & SQS Integration**
-
-- Users can upload files to **AWS S3**.
-- Messages for events (e.g., notifications) are sent to **AWS SQS** for processing.
-
-### 6️⃣ **Stripe Payment Integration**
-
-- Users can add payment cards and make transactions.
-- Transaction details are stored securely.
+- **i18n for Multilingual Support** – Supports English, Hindi, French, and German

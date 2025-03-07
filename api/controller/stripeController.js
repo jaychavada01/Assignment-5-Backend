@@ -11,13 +11,13 @@ const createCustomer = async (req, res) => {
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: res.t("auth.user_not_found") });
     }
 
     //? Check if the user already has a Stripe customer ID
     if (user.stripeCustomerId) {
       return res.status(STATUS_CODES.BAD_REQUEST).json({
-        message: "User already has a Stripe customer ID",
+        message: res.t("payment.stripe_customer_exist"),
         stripeCustomerId: user.stripeCustomerId,
       });
     }
@@ -33,7 +33,7 @@ const createCustomer = async (req, res) => {
     await user.save();
 
     res.status(STATUS_CODES.CREATED).json({
-      message: "Customer created successfully",
+      message: res.t("payment.customer_creation_success"),
       stripeCustomerId: customer.id,
       customer,
     });
@@ -41,7 +41,7 @@ const createCustomer = async (req, res) => {
     console.error("Error creating Stripe customer:", error);
     res
       .status(STATUS_CODES.SERVER_ERROR)
-      .json({ message: "Failed to create customer!" });
+      .json({ message: res.t("payment.customer_creation_failed") });
   }
 };
 
@@ -54,7 +54,7 @@ const addCardWithToken = async (req, res) => {
     if (!user || !user.stripeCustomerId) {
       return res
         .status(STATUS_CODES.NOT_FOUND)
-        .json({ message: "User not found or missing Stripe Customer ID!" });
+        .json({ message: res.t("payment.stripe_customer_notfound") });
     }
 
     //? Create a Payment Method from token
@@ -80,12 +80,12 @@ const addCardWithToken = async (req, res) => {
 
     res
       .status(STATUS_CODES.CREATED)
-      .json({ message: "Test card added successfully!", card: newCard });
+      .json({ message: res.t("payment.card_add_success"), card: newCard });
   } catch (error) {
     console.error("Error adding test card:", error);
     res
       .status(STATUS_CODES.SERVER_ERROR)
-      .json({ message: "Failed to add test card!", error: error.message });
+      .json({ message: res.t("payment.card_add_failed"), error: error.message });
   }
 };
 
@@ -98,7 +98,7 @@ const makePayment = async (req, res) => {
     if (!user) {
       return res
         .status(STATUS_CODES.NOT_FOUND)
-        .json({ message: "User not found or missing Stripe Customer ID!" });
+        .json({ message: res.t("payment.stripe_customer_notfound") });
     }
 
     // ? Fetch saved card details of user
@@ -106,7 +106,7 @@ const makePayment = async (req, res) => {
     if (!card) {
       res
         .status(STATUS_CODES.BAD_REQUEST)
-        .json({ message: "No saved card found for this user!" });
+        .json({ message: res.t("payment.no_card") });
     }
 
     // ? initiates payment method with paymentIntents
@@ -130,7 +130,7 @@ const makePayment = async (req, res) => {
     await card.save();
 
     res.status(STATUS_CODES.SUCCESS).json({
-      message: "Payment successful",
+      message: res.t("payment.payment_success"),
       paymentInitiate: {
         id: paymentInitiate.id,
         amount: paymentInitiate.amount / 100,
@@ -144,7 +144,7 @@ const makePayment = async (req, res) => {
   } catch (error) {
     console.error("Error while making payment!", error);
     res.status(STATUS_CODES.SERVER_ERROR).json({
-      message: "Failed make payment Successfull!",
+      message: res.t("payment.payment_failed"),
       error: error.message,
     });
   }

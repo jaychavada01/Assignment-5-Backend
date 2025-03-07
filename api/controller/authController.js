@@ -69,7 +69,7 @@ const signUp = async (req, res) => {
     if (await User.findOne({ where: { email } })) {
       return res
         .status(STATUS_CODES.BAD_REQUEST)
-        .json({ message: "User already registered!" });
+        .json({ message: res.t("auth.user_already") });
     }
 
     let referringUser = referralCode
@@ -78,7 +78,7 @@ const signUp = async (req, res) => {
     if (referralCode && !referringUser) {
       return res
         .status(STATUS_CODES.BAD_REQUEST)
-        .json({ message: "Invalid referral code!" });
+        .json({ message: res.t("auth.Invalid_referral") });
     }
 
     const user = await User.create({
@@ -132,7 +132,7 @@ const signUp = async (req, res) => {
 
     res
       .status(STATUS_CODES.CREATED)
-      .json({ message: "User registered successfully", accessToken: token });
+      .json({ message: res.t("auth.signup_success"), accessToken: token });
   } catch (error) {
     console.error("SignUp Error:", error);
     res.status(STATUS_CODES.SERVER_ERROR).json({ message: error.message });
@@ -147,7 +147,7 @@ const login = async (req, res) => {
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res
         .status(STATUS_CODES.UNAUTHORIZED)
-        .json({ message: "Invalid credentials" });
+        .json({ message: res.t("auth.invalid_credentials") });
     }
 
     const today = new Date().toISOString().split("T")[0];
@@ -189,7 +189,7 @@ const login = async (req, res) => {
     }
 
     res.json({
-      message: "Login successful",
+      message: res.t("auth.login_success"),
       accessToken: token,
       coins: user.coins,
       loginCount: user.loginCount,
@@ -198,7 +198,7 @@ const login = async (req, res) => {
     console.error("Login Error:", error);
     res
       .status(STATUS_CODES.SERVER_ERROR)
-      .json({ message: "Internal server error" });
+      .json({ message: res.t("common.server_error") });
   }
 };
 
@@ -212,11 +212,11 @@ const logout = async (req, res) => {
     user.accessToken = null; // Clear active token
     await user.save();
 
-    res.status(STATUS_CODES.SUCCESS).json({ message: "Logout successful" });
+    res.status(STATUS_CODES.SUCCESS).json({ message: res.t("auth.logout_success") });
   } catch (error) {
     res
       .status(STATUS_CODES.SERVER_ERROR)
-      .json({ message: "Error logging out" });
+      .json({ message: res.t("auth.logout_error") });
   }
 };
 
@@ -229,7 +229,7 @@ const updateProfile = async (req, res) => {
     // Fetch user details
     const user = await User.findByPk(userId);
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: res.t("auth.user_not_found") });
     }
 
     // Update profile fields
@@ -257,7 +257,7 @@ const updateProfile = async (req, res) => {
     await user.save();
 
     res.json({
-      message: "Profile updated successfully!",
+      message: res.t("auth.profile_update_success"),
       isProfileComplete: user.isProfileComplete,
       coins: user.coins,
       profilePic: user.profilePic,
@@ -266,7 +266,7 @@ const updateProfile = async (req, res) => {
     console.error("Error updating profile:", error);
     res
       .status(STATUS_CODES.SERVER_ERROR)
-      .json({ message: "Internal server error" });
+      .json({ message: res.t("common.server_error") });
   }
 };
 
@@ -281,7 +281,7 @@ const forgetPassword = async (req, res) => {
     if (!user) {
       return res
         .status(STATUS_CODES.NOT_FOUND)
-        .json({ message: "User not found." });
+        .json({ message: res.t("auth.user_not_found") });
     }
 
     // Generate unique token and expiry time (10 min)
@@ -312,14 +312,14 @@ const forgetPassword = async (req, res) => {
     await sendEmail(email, "Password Reset Request", htmlContent);
 
     res.status(STATUS_CODES.SUCCESS).json({
-      message: "Password reset email sent successfully!",
+      message: res.t("auth.password_reset_success"),
       forgetPasswordToken, // Include in response for debugging (will Remove in production)
     });
   } catch (error) {
     console.error("Forget Password Error:", error);
     res
       .status(STATUS_CODES.SERVER_ERROR)
-      .json({ message: "Server error. Please try again later." });
+      .json({ message: res.t("common.server_error") });
   }
 };
 
@@ -342,7 +342,7 @@ const resetPassword = async (req, res) => {
     if (!user) {
       return res
         .status(STATUS_CODES.BAD_REQUEST)
-        .json({ message: "Invalid or expired token." });
+        .json({ message: res.t("auth.Invalid_Token") });
     }
 
     // Hash and update the new password
@@ -355,13 +355,13 @@ const resetPassword = async (req, res) => {
 
     res.status(STATUS_CODES.SUCCESS).json({
       message:
-        "Password reset successful! You can now log in with your new password.",
+        res.t("auth.pass_reset")
     });
   } catch (error) {
     console.error("Reset Password Error:", error);
     res
       .status(STATUS_CODES.SERVER_ERROR)
-      .json({ message: "Server error. Please try again later." });
+      .json({ message: res.t("common.server_error") });
   }
 };
 
@@ -378,7 +378,7 @@ const changePassword = async (req, res) => {
     if (!user) {
       return res
         .status(STATUS_CODES.NOT_FOUND)
-        .json({ message: "User not found." });
+        .json({ message: res.t("auth.user_not_found") });
     }
 
     // Verify old password
@@ -386,7 +386,7 @@ const changePassword = async (req, res) => {
     if (!isMatch) {
       return res
         .status(STATUS_CODES.UNAUTHORIZED)
-        .json({ message: "Incorrect old password!" });
+        .json({ message: res.t("auth.Incorrect_old_pass") });
     }
 
     // Hash and update new password
@@ -399,12 +399,12 @@ const changePassword = async (req, res) => {
 
     res
       .status(STATUS_CODES.SUCCESS)
-      .json({ message: "Password changed successfully! Please log in again." });
+      .json({ message: res.t("auth.password_change_relogin") });
   } catch (error) {
     console.error("Change Password Error:", error);
     res
       .status(STATUS_CODES.SERVER_ERROR)
-      .json({ message: "Server error. Please try again later." });
+      .json({ message: res.t("common.server_error") });
   }
 };
 
@@ -415,14 +415,14 @@ const getUserActivity = async (req, res) => {
     const activityData = await calculateUserActivity(userId);
 
     res.status(STATUS_CODES.SUCCESS).json({
-      message: "User activity retrieved successfully",
+      message: res.t("auth.user_activity"),
       data: activityData,
     });
   } catch (error) {
     console.error("Get User Activity Error:", error);
     res
       .status(STATUS_CODES.SERVER_ERROR)
-      .json({ message: "Failed to retrieve user activity" });
+      .json({ message: res.t("common.server_error") });
   }
 };
 

@@ -7,7 +7,7 @@ const uploadFileToAWS = async (req, res) => {
     if (!req.file) {
       return res
         .status(STATUS_CODES.BAD_REQUEST)
-        .json({ error: "No file uploaded" });
+        .json({ error: res.t("aws.no_fileupload") });
     }
 
     // Upload to S3
@@ -15,11 +15,11 @@ const uploadFileToAWS = async (req, res) => {
 
     res
       .status(STATUS_CODES.SUCCESS)
-      .json({ message: "File uploaded successfully", fileUrl });
+      .json({ message: res.t("aws.upload_success"), fileUrl });
   } catch (error) {
     res
       .status(STATUS_CODES.SERVER_ERROR)
-      .json({ error: "Failed to upload file", details: error.message });
+      .json({ error: res.t("aws.upload_failed"), details: error.message });
   }
 };
 
@@ -28,7 +28,7 @@ const sendMessageToSQS = async (req, res) => {
     const { message } = req.body;
 
     if (!message) {
-      return res.status(STATUS_CODES.BAD_REQUEST).json({ error: "Message body is required" });
+      return res.status(STATUS_CODES.BAD_REQUEST).json({ error:  res.t("aws.message_body")});
     }
 
     const messageId = await sendMessageToQueue({
@@ -36,11 +36,11 @@ const sendMessageToSQS = async (req, res) => {
       timestamp: Date.now(),
     });
 
-    res.status(STATUS_CODES.SUCCESS).json({ message: "Message sent successfully", messageId });
+    res.status(STATUS_CODES.SUCCESS).json({ message: res.t("aws.sqs_message_sent"), messageId });
   } catch (error) {
     res
       .status(STATUS_CODES.SERVER_ERROR)
-      .json({ error: "Failed to send message", details: error.message });
+      .json({ error: res.t("aws.sqs_message_failed"), details: error.message });
   }
 };
 

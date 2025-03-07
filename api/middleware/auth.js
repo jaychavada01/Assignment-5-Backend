@@ -9,7 +9,7 @@ const authenticate = async (req, res, next) => {
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res
         .status(STATUS_CODES.UNAUTHORIZED)
-        .json({ message: "Unauthorized, token missing!" });
+        .json({ message: res.t("auth.unauthorized") });
     }
 
     const token = authHeader.split(" ")[1];
@@ -22,23 +22,24 @@ const authenticate = async (req, res, next) => {
     if (!user) {
       return res
         .status(STATUS_CODES.UNAUTHORIZED)
-        .json({ message: "Invalid token: User not found!" });
+        .json({ message: res.t("auth.unauthorized") });
     }
 
     // Ensure blacklistedTokens is an array before checking
-    if (Array.isArray(user.blacklistedTokens) && user.blacklistedTokens.includes(token)) {
+    if (
+      Array.isArray(user.blacklistedTokens) &&
+      user.blacklistedTokens.includes(token)
+    ) {
       return res
         .status(STATUS_CODES.UNAUTHORIZED)
-        .json({ message: "Token is blacklisted!" });
+        .json({ message: res.t("auth.blacklisted_token") });
     }
 
     req.user = user;
     next();
   } catch (error) {
     return res.status(STATUS_CODES.UNAUTHORIZED).json({
-      message: error.name === "TokenExpiredError" 
-        ? "Token expired!" 
-        : "Invalid or expired token!",
+      message: res.t("auth.invalid_token"),
     });
   }
 };
