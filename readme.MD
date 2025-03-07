@@ -115,20 +115,20 @@ STRIPE_SECRET_KEY=your_key
 ### **Authentication**
 
 | Method | Endpoint                 | Description                                                              | Auth Required |
-| ------ | ------------------------ | ------------------------------------------------------------------------ | ------------- | --- |
+| ------ | ------------------------ | ------------------------------------------------------------------------ | ------------- |
 | POST   | `/users/signup`          | Register a new user. If a referral code is used, both users get rewards. | ❌ No         |
-| POST   | `/users/login`           | Log in and get JWT token. Tracks daily login rewards.                    | ❌ No         |     |
+| POST   | `/users/login`           | Log in and get JWT token. Tracks daily login rewards.                    | ❌ No         |
 | POST   | `/users/logout`          | Log out and blacklist token.                                             | ✅ Yes        |
 | POST   | `/users/reset-password`  | Reset password.                                                          | ❌ No         |
 | POST   | `/users/forgot-password` | Send password reset email.                                               | ❌ No         |
-| POST   | `/users/change-password` | change password.                                                         | ✅ Yes        |
+| POST   | `/users/change-password` | Change password.                                                         | ✅ Yes        |
 
 ### **Profile Update and User Activity**
 
 | Method | Endpoint               | Description                                                              | Auth Required |
-| ------ | ---------------------- | ------------------------------------------------------------------------ | ------------- | --- |
-| PUT    | `/users/profile`       | Complete the user profile with profile pic and bio, For pic used multer. | ✅ Yes        |
-| POST   | `/users/user-activity` | Get all activities completed by the user.                                | ✅ Yes        |     |
+| ------ | ---------------------- | ------------------------------------------------------------------------ | ------------- |
+| PUT    | `/users/profile`       | Complete the user profile with profile pic and bio, for pic used multer. | ✅ Yes        |
+| POST   | `/users/user-activity` | Get all activities completed by the user.                                | ✅ Yes        |
 
 ### **AWS Integrations**
 
@@ -144,16 +144,6 @@ STRIPE_SECRET_KEY=your_key
 | POST   | `/user/pay/stripe-customer` | Create a Stripe customer             | ✅ Yes        |
 | POST   | `/user/pay/add-card`        | Create a card for user               | ✅ Yes        |
 | GET    | `/user/pay/make-payment`    | Make payment with existing user card | ✅ Yes        |
-
----
-
-## 🏆 Achievements & Rewards
-
-| Achievement          | Requirement                   | Reward |
-| -------------------- | ----------------------------- | ------ |
-| **Early Bird**       | Log in for 3 consecutive days | 10 pts |
-| **Networker**        | Successfully refer 5 friends  | 50 pts |
-| **Verified Profile** | Complete 100% of profile      | 30 pts |
 
 ---
 
