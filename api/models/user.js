@@ -85,10 +85,11 @@ const User = sequelize.define(
       allowNull: true,
       defaultValue: [],
     },
-    stripeCustomerId: { // stripe implementation
+    // stripe implementation
+    stripeCustomerId: {
       type: DataTypes.STRING,
       allowNull: true, // Allow null initially, but will be set after Stripe customer creation
-    },
+    }
   },
   {
     timestamps: true,

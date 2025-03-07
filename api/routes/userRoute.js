@@ -1,7 +1,6 @@
 const express = require("express");
 const authController = require("../controller/authController.js");
 const awsController = require("../controller/awsController.js");
-const stripeController = require("../controller/stripeController.js");
 const { authenticate } = require("../middleware/auth.js");
 const upload = require("../middleware/upload.js");
 
@@ -18,15 +17,12 @@ router.put("/profile", authenticate, upload.single("profilePic"), authController
 router.put("/upload-aws", authenticate, upload.single("file"), awsController.uploadFileToAWS);
 
 //? Send msg to SQS
-router.post("/send-message", awsController.sendMessageToSQS);
+router.post("/send-message", authenticate, awsController.sendMessageToSQS);
 
 router.post("/change-password", authenticate, authController.changePassword);
 router.post("/forgot-password", authController.forgetPassword);
 router.post("/reset-password", authController.resetPassword);
 
 router.get("/user-activity", authenticate, authController.getUserActivity);
-
-// ? stripe customer creation
-router.post("/stripe-customer", authenticate, stripeController.createCustomer)
 
 module.exports = router;

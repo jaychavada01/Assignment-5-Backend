@@ -4,6 +4,7 @@ const path = require("path");
 const app = express();
 
 const userRoute = require("./routes/userRoute.js");
+const paymentRoute = require("./routes/paymentRoute.js");
 
 const { STATUS_CODES } = require("./config/constant");
 const { sequelize } = require("./config/database.js");
@@ -22,6 +23,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //? Routes
 app.use("/users", userRoute);
+app.use("/user/pay", paymentRoute);
 
 app.use("*", (req, res) => {
   res.status(STATUS_CODES.BAD_REQUEST).json({ message: "Invalid route!" });
