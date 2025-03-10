@@ -10,48 +10,62 @@ This project is a backend application built with **Node.js**, **Express.js**, an
 
 ```
 Assignment/
-├─ .gitignore
-├─ api/
-│  ├─ .env
-│  ├─ app.js
-│  ├─ config/
-│  │  ├─ aws.js
-│  │  ├─ constant.js
-│  │  ├─ database.js
-│  │  ├─ firebase.js
-│  │  ├─ serviceAccountKey.json
-│  │  └─ stripe.js
-│  ├─ controller/
-│  │  ├─ authController.js
-│  │  ├─ awsController.js
-│  │  └─ stripeController.js
-│  ├─ locales/
-│  │  ├─ de.json
-│  │  ├─ en.json
-│  │  ├─ fr.json
-│  │  └─ hi.json
-│  ├─ middleware/
-│  │  ├─ auth.js
-│  │  ├─ i18n.js
-│  │  └─ upload.js
-│  ├─ models/
-│  │  ├─ activity.js
-│  │  ├─ cardDetails.js
-│  │  ├─ notificationToken.js
-│  │  └─ user.js
-│  ├─ package-lock.json
-│  ├─ package.json
-│  ├─ routes/
-│  │  ├─ paymentRoute.js
-│  │  └─ userRoute.js
-│  ├─ utils/
-│     ├─ activityCalculator.js
-│     ├─ mailer.js
-│     ├─ notification.js
-│     ├─ s3.js
-│     └─ sqs.js
-└─ readme.MD
-
+├─ .gitignore                              # Git ignore file
+├─ readme.MD                               # Project documentation
+├─ api/                                    # Main application directory
+│  ├─ .env                                 # Environment variables
+│  ├─ app.js                               # Application entry point
+│  ├─ package.json                         # Project dependencies
+│  ├─ package-lock.json                    # Dependency lock file
+│  │
+│  ├─ config/                              # Configuration files
+│  │  ├─ aws.js                            # AWS configuration
+│  │  ├─ constant.js                       # Application constants
+│  │  ├─ database.js                       # Database configuration
+│  │  ├─ firebase.js                       # Firebase configuration
+│  │  ├─ serviceAccountKey.json            # Firebase service account key
+│  │  ├─ stripe.js                         # Stripe payment configuration
+│  │  └─ swagger.js                        # API documentation configuration
+│  │
+│  ├─ controller/                          # Request handlers
+│  │  ├─ authController.js                 # Authentication controllers
+│  │  ├─ awsController.js                  # AWS-related controllers
+│  │  └─ stripeController.js               # Payment processing controllers
+│  │
+│  ├─ helpers/                             # Helper functions
+│  │  └─ sqsworker.js                      # SQS message processing worker
+│  │
+│  ├─ locales/                             # Multilingual support files
+│  │  ├─ de.json                           # German translations
+│  │  ├─ en.json                           # English translations
+│  │  ├─ fr.json                           # French translations
+│  │  └─ hi.json                           # Hindi translations
+│  │
+│  ├─ middleware/                          # Middleware functions
+│  │  ├─ auth.js                           # Authentication middleware
+│  │  ├─ i18n.js                           # Internationalization middleware
+│  │  └─ upload.js                         # File upload middleware
+│  │
+│  ├─ models/                              # Database models
+│  │  ├─ activity.js                       # User activity tracking model
+│  │  ├─ cardDetails.js                    # Payment card details model
+│  │  ├─ notificationToken.js              # User notification tokens model
+│  │  └─ user.js                           # User account model
+│  │
+│  ├─ routes/                              # API routes
+│  │  ├─ paymentRoute.js                   # Payment endpoint routes
+│  │  └─ userRoute.js                      # User endpoint routes
+│  │
+│  ├─ uploads/                             # Temporary file storage
+│  │  ├─ 1741156197174-images.jpeg         # Uploaded image example
+│  │  └─ 1741156262013-images.jpeg         # Uploaded image example
+│  │
+│  └─ utils/                               # Utility functions
+│     ├─ activityCalculator.js             # User activity calculation logic
+│     ├─ mailer.js                         # Email sending functionality
+│     ├─ notification.js                   # Push notification services
+│     ├─ s3.js                             # AWS S3 interaction utilities
+│     └─ sqs.js                            # AWS SQS interaction utilities
 ```
 
 ---
@@ -111,14 +125,15 @@ STRIPE_SECRET_KEY=your_key
 ✅ **AWS SQS Integration** (Message queuing for notifications & tasks)  
 ✅ **Stripe Payment Integration** (Card management & transactions)  
 ✅ **Multilingual Support** (English, Hindi, French, German)
+✅ **API Documentation** (Swagger integration)
 
 ---
 
 ### **Multilingual Support**
 
 - The application supports multiple languages: **English (default), Hindi, French, and German**.
-- Language preference is detected from the request headers or defaults to English (`en`).
-- Translations are stored in `/locales/` directory.
+- Language preference is detected from the request headers or query parameters (`?lang=fr`).
+- Translations are stored in the `/locales/` directory.
 - Example usage in API response:
   ```js
   res.t("auth.signup_success"); // Retrieves translated message based on user's language preference
@@ -146,6 +161,14 @@ STRIPE_SECRET_KEY=your_key
 | POST   | `/users/upload-aws`   | Upload files to AWS S3          | ✅ Yes        |
 | POST   | `/users/send-message` | Send a message to AWS SQS queue | ✅ Yes        |
 
+### **Payment Processing**
+
+| Method | Endpoint                | Description                      | Auth Required |
+| ------ | ----------------------- | -------------------------------- | ------------- |
+| POST   | `/payment/add-card`     | Add a new payment card           | ✅ Yes        |
+| GET    | `/payment/cards`        | List all saved payment cards     | ✅ Yes        |
+| POST   | `/payment/transaction`  | Process a payment transaction    | ✅ Yes        |
+
 ---
 
 ## 🚀 How It Works
@@ -158,22 +181,23 @@ STRIPE_SECRET_KEY=your_key
 ### 2. **Multilingual Support**
 
 - Users can receive API responses in **English, Hindi, French, or German**.
-- The system detects it from query `?lang='fr'` for new language
+- The system detects language preference from request headers or query parameters (`?lang=fr`).
 
 ### 3. **Daily Login Rewards**
 
 - Users receive **10 coins** every day they log in.
-- Logs are stored in the **Activity table**.
+- Activity logs are stored in the **Activity table**.
 
 ### 4. **AWS S3 & SQS Integration**
 
-- Users can upload files to **AWS S3**.
-- Messages for events (e.g., notifications) are sent to **AWS SQS** for processing.
+- Users can upload files to **AWS S3** for secure storage.
+- Messages for events (e.g., notifications) are sent to **AWS SQS** for asynchronous processing.
+- The SQS worker process handles background tasks and notifications.
 
 ### 5. **Stripe Payment Integration**
 
-- Users can add payment cards and make transactions.
-- Transaction details are stored securely.
+- Users can add payment cards and make transactions securely.
+- Card details are stored using Stripe's token system for PCI compliance.
 
 ---
 
@@ -187,4 +211,6 @@ STRIPE_SECRET_KEY=your_key
 - **AWS S3** – File Storage
 - **AWS SQS** – Message Queue Service
 - **Stripe** – Payment Processing
-- **i18n for Multilingual Support** – Supports English, Hindi, French, and German
+- **i18n** – Multilingual Support
+- **Swagger** – API Documentation
+- **Firebase** – Notifications (Optional)
