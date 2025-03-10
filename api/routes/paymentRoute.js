@@ -13,7 +13,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /user/pay/stripe-customer:
+ * /api/pay/stripe-customer:
  *   post:
  *     summary: Create a new Stripe customer
  *     description: Creates a new Stripe customer and associates it with the authenticated user
@@ -56,7 +56,7 @@ router.post("/stripe-customer", authenticate, stripeController.createCustomer);
 
 /**
  * @swagger
- * /user/pay/add-card:
+ * /api/pay/add-card:
  *   post:
  *     summary: Add a new payment card
  *     description: Adds a new card to the authenticated user's Stripe account
@@ -99,7 +99,7 @@ router.post("/add-card", authenticate, stripeController.addCardWithToken);
 
 /**
  * @swagger
- * /user/pay/make-payment:
+ * /api/pay/make-payment:
  *   post:
  *     summary: Process a payment
  *     description: Process a payment using a saved card

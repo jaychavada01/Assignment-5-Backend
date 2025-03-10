@@ -36,7 +36,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //? Routes
 app.use("/api", userRoute);
-app.use("/user/pay", paymentRoute);
+app.use("/api/pay", paymentRoute);
 
 //? Handle invalid routes
 app.use("*", (req, res) => {

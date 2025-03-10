@@ -1,46 +1,47 @@
 {
-  "auth": {
-    "signup_success": "उपयोगकर्ता सफलतापूर्वक पंजीकृत हुआ",
-    "login_success": "लॉगिन सफल",
-    "logout_success": "लॉगआउट सफल",
-    "logout_error": "लॉगआउट में त्रुटि!",
-    "user_already": "उपयोगकर्ता पहले से मौजूद है!",
-    "invalid_credentials": "अमान्य प्रमाण पत्र",
-    "profile_update_success": "प्रोफ़ाइल सफलतापूर्वक अपडेट की गई",
-    "user_not_found": "उपयोगकर्ता नहीं मिला",
-    "password_reset_success": "पासवर्ड रीसेट ईमेल सफलतापूर्वक भेजा गया!",
-    "pass_reset": "पासवर्ड रीसेट सफल! अब आप अपने नए पासवर्ड से लॉगिन कर सकते हैं।",
-    "password_change_success": "पासवर्ड सफलतापूर्वक बदला गया",
-    "password_change_relogin": "पासवर्ड सफलतापूर्वक बदला गया! कृपया पुनः लॉगिन करें।",
-    "Invalid_Route": "अमान्य मार्ग",
-    "Invalid_referral": "अमान्य रेफरल कोड!",
-    "Invalid_Token": "अमान्य या समाप्त हो चुका टोकन।",
-    "Incorrect_old_pass": "पुराना पासवर्ड गलत है!",
-    "user_activity": "उपयोगकर्ता गतिविधि सफलतापूर्वक प्राप्त हुई",
-    "unauthorized": "अनधिकृत, टोकन गायब!",
-    "blacklisted_token": "टोकन ब्लैकलिस्ट में है!",
-    "invalid_token": "अमान्य या समाप्त हो चुका टोकन!"
-  },
-  "aws": {
-    "upload_success": "फ़ाइल सफलतापूर्वक अपलोड की गई",
-    "upload_failed": "फ़ाइल अपलोड करने में विफल!",
-    "no_fileupload": "कोई फ़ाइल अपलोड नहीं की गई!",
-    "sqs_message_sent": "संदेश SQS को सफलतापूर्वक भेजा गया",
-    "sqs_message_failed": "SQS को संदेश भेजने में विफल",
-    "message_body": "संदेश सामग्री आवश्यक है"
-  },
-  "payment": {
-    "customer_creation_success": "स्ट्राइप ग्राहक सफलतापूर्वक बनाया गया",
-    "stripe_customer_exist": "उपयोगकर्ता के पास पहले से ही एक स्ट्राइप ग्राहक आईडी है",
-    "stripe_customer_notfound": "उपयोगकर्ता नहीं मिला या स्ट्राइप ग्राहक आईडी गायब है!",
-    "customer_creation_failed": "स्ट्राइप ग्राहक बनाने में विफल",
-    "card_add_success": "कार्ड सफलतापूर्वक जोड़ा गया",
-    "card_add_failed": "कार्ड जोड़ने में विफल",
-    "no_card": "इस उपयोगकर्ता के लिए कोई सहेजा गया कार्ड नहीं मिला!",
-    "payment_success": "भुगतान सफलतापूर्वक संसाधित हुआ",
-    "payment_failed": "भुगतान विफल"
-  },
-  "common": {
-    "server_error": "कुछ गलत हो गया, कृपया बाद में पुनः प्रयास करें"
-  }
+	"auth": {
+		"signup_success": "उपयोगकर्ता सफलतापूर्वक पंजीकृत हुआ",
+		"login_success": "लॉगिन सफल",
+		"logout_success": "लॉगआउट सफल",
+		"logout_error": "लॉगआउट में त्रुटि!",
+		"user_already": "उपयोगकर्ता पहले से मौजूद है!",
+		"invalid_credentials": "अमान्य प्रमाण पत्र",
+		"profile_update_success": "प्रोफ़ाइल सफलतापूर्वक अपडेट की गई",
+		"user_not_found": "उपयोगकर्ता नहीं मिला",
+		"password_reset_success": "पासवर्ड रीसेट ईमेल सफलतापूर्वक भेजा गया!",
+		"pass_reset": "पासवर्ड रीसेट सफल! अब आप अपने नए पासवर्ड से लॉगिन कर सकते हैं।",
+		"password_change_success": "पासवर्ड सफलतापूर्वक बदला गया",
+		"password_change_relogin": "पासवर्ड सफलतापूर्वक बदला गया! कृपया पुनः लॉगिन करें।",
+		"Invalid_Route": "अमान्य मार्ग",
+		"Invalid_referral": "अमान्य रेफरल कोड!",
+		"Invalid_Token": "अमान्य या समाप्त हो चुका टोकन।",
+		"Incorrect_old_pass": "पुराना पासवर्ड गलत है!",
+		"user_activity": "उपयोगकर्ता गतिविधि सफलतापूर्वक प्राप्त हुई",
+		"unauthorized": "अनधिकृत, टोकन गायब!",
+		"blacklisted_token": "टोकन ब्लैकलिस्ट में है!",
+		"invalid_token": "अमान्य या समाप्त हो चुका टोकन!",
+		"Entered_old_pass": "आपने पुराना पासवर्ड दर्ज किया है! कृपया एक नया पासवर्ड दर्ज करें!"
+	},
+	"aws": {
+		"upload_success": "फ़ाइल सफलतापूर्वक अपलोड की गई",
+		"upload_failed": "फ़ाइल अपलोड करने में विफल!",
+		"no_fileupload": "कोई फ़ाइल अपलोड नहीं की गई!",
+		"sqs_message_sent": "संदेश SQS को सफलतापूर्वक भेजा गया",
+		"sqs_message_failed": "SQS को संदेश भेजने में विफल",
+		"message_body": "संदेश सामग्री आवश्यक है"
+	},
+	"payment": {
+		"customer_creation_success": "स्ट्राइप ग्राहक सफलतापूर्वक बनाया गया",
+		"stripe_customer_exist": "उपयोगकर्ता के पास पहले से ही एक स्ट्राइप ग्राहक आईडी है",
+		"stripe_customer_notfound": "उपयोगकर्ता नहीं मिला या स्ट्राइप ग्राहक आईडी गायब है!",
+		"customer_creation_failed": "स्ट्राइप ग्राहक बनाने में विफल",
+		"card_add_success": "कार्ड सफलतापूर्वक जोड़ा गया",
+		"card_add_failed": "कार्ड जोड़ने में विफल",
+		"no_card": "इस उपयोगकर्ता के लिए कोई सहेजा गया कार्ड नहीं मिला!",
+		"payment_success": "भुगतान सफलतापूर्वक संसाधित हुआ",
+		"payment_failed": "भुगतान विफल"
+	},
+	"common": {
+		"server_error": "कुछ गलत हो गया, कृपया बाद में पुनः प्रयास करें"
+	}
 }

@@ -1,46 +1,47 @@
 {
-  "auth": {
-    "signup_success": "Benutzer erfolgreich registriert",
-    "login_success": "Anmeldung erfolgreich",
-    "logout_success": "Abmeldung erfolgreich",
-    "logout_error": "Fehler bei der Abmeldung!",
-    "user_already": "Benutzer existiert bereits!",
-    "invalid_credentials": "Ungültige Anmeldeinformationen",
-    "profile_update_success": "Profil erfolgreich aktualisiert",
-    "user_not_found": "Benutzer nicht gefunden",
-    "password_reset_success": "Passwort-Reset-E-Mail erfolgreich gesendet!",
-    "pass_reset": "Passwort erfolgreich zurückgesetzt! Sie können sich jetzt mit Ihrem neuen Passwort anmelden.",
-    "password_change_success": "Passwort erfolgreich geändert",
-    "password_change_relogin": "Passwort erfolgreich geändert! Bitte melden Sie sich erneut an.",
-    "Invalid_Route": "Ungültige Route",
-    "Invalid_referral": "Ungültiger Empfehlungscode!",
-    "Invalid_Token": "Ungültiges oder abgelaufenes Token.",
-    "Incorrect_old_pass": "Falsches altes Passwort!",
-    "user_activity": "Benutzeraktivität erfolgreich abgerufen",
-    "unauthorized": "Nicht autorisiert, Token fehlt!",
-    "blacklisted_token": "Token ist auf der schwarzen Liste!",
-    "invalid_token": "Ungültiges oder abgelaufenes Token!"
-  },
-  "aws": {
-    "upload_success": "Datei erfolgreich hochgeladen",
-    "upload_failed": "Datei-Upload fehlgeschlagen!",
-    "no_fileupload": "Keine Datei hochgeladen!",
-    "sqs_message_sent": "Nachricht erfolgreich an SQS gesendet",
-    "sqs_message_failed": "Fehler beim Senden der Nachricht an SQS",
-    "message_body": "Nachrichteninhalt ist erforderlich"
-  },
-  "payment": {
-    "customer_creation_success": "Stripe-Kunde erfolgreich erstellt",
-    "stripe_customer_exist": "Benutzer hat bereits eine Stripe-Kundennummer",
-    "stripe_customer_notfound": "Benutzer nicht gefunden oder fehlende Stripe-Kundennummer!",
-    "customer_creation_failed": "Erstellung des Stripe-Kunden fehlgeschlagen",
-    "card_add_success": "Karte erfolgreich hinzugefügt",
-    "card_add_failed": "Hinzufügen der Karte fehlgeschlagen",
-    "no_card": "Keine gespeicherte Karte für diesen Benutzer gefunden!",
-    "payment_success": "Zahlung erfolgreich verarbeitet",
-    "payment_failed": "Zahlung fehlgeschlagen"
-  },
-  "common": {
-    "server_error": "Etwas ist schief gelaufen, bitte versuchen Sie es später erneut"
-  }
+	"auth": {
+		"signup_success": "Benutzer erfolgreich registriert",
+		"login_success": "Anmeldung erfolgreich",
+		"logout_success": "Abmeldung erfolgreich",
+		"logout_error": "Fehler bei der Abmeldung!",
+		"user_already": "Benutzer existiert bereits!",
+		"invalid_credentials": "Ungültige Anmeldeinformationen",
+		"profile_update_success": "Profil erfolgreich aktualisiert",
+		"user_not_found": "Benutzer nicht gefunden",
+		"password_reset_success": "Passwort-Reset-E-Mail erfolgreich gesendet!",
+		"pass_reset": "Passwort erfolgreich zurückgesetzt! Sie können sich jetzt mit Ihrem neuen Passwort anmelden.",
+		"password_change_success": "Passwort erfolgreich geändert",
+		"password_change_relogin": "Passwort erfolgreich geändert! Bitte melden Sie sich erneut an.",
+		"Invalid_Route": "Ungültige Route",
+		"Invalid_referral": "Ungültiger Empfehlungscode!",
+		"Invalid_Token": "Ungültiges oder abgelaufenes Token.",
+		"Incorrect_old_pass": "Falsches altes Passwort!",
+		"user_activity": "Benutzeraktivität erfolgreich abgerufen",
+		"unauthorized": "Nicht autorisiert, Token fehlt!",
+		"blacklisted_token": "Token ist auf der schwarzen Liste!",
+		"invalid_token": "Ungültiges oder abgelaufenes Token!",
+		"Entered_old_pass": "Sie haben ein altes Passwort eingegeben! Bitte geben Sie ein neues Passwort ein!"
+	},
+	"aws": {
+		"upload_success": "Datei erfolgreich hochgeladen",
+		"upload_failed": "Datei-Upload fehlgeschlagen!",
+		"no_fileupload": "Keine Datei hochgeladen!",
+		"sqs_message_sent": "Nachricht erfolgreich an SQS gesendet",
+		"sqs_message_failed": "Fehler beim Senden der Nachricht an SQS",
+		"message_body": "Nachrichteninhalt ist erforderlich"
+	},
+	"payment": {
+		"customer_creation_success": "Stripe-Kunde erfolgreich erstellt",
+		"stripe_customer_exist": "Benutzer hat bereits eine Stripe-Kundennummer",
+		"stripe_customer_notfound": "Benutzer nicht gefunden oder fehlende Stripe-Kundennummer!",
+		"customer_creation_failed": "Erstellung des Stripe-Kunden fehlgeschlagen",
+		"card_add_success": "Karte erfolgreich hinzugefügt",
+		"card_add_failed": "Hinzufügen der Karte fehlgeschlagen",
+		"no_card": "Keine gespeicherte Karte für diesen Benutzer gefunden!",
+		"payment_success": "Zahlung erfolgreich verarbeitet",
+		"payment_failed": "Zahlung fehlgeschlagen"
+	},
+	"common": {
+		"server_error": "Etwas ist schief gelaufen, bitte versuchen Sie es später erneut"
+	}
 }

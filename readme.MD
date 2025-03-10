@@ -145,29 +145,29 @@ STRIPE_SECRET_KEY=your_key
 
 ### **Authentication**
 
-| Method | Endpoint                 | Description                                                              | Auth Required |
-| ------ | ------------------------ | ------------------------------------------------------------------------ | ------------- |
-| POST   | `/users/signup`          | Register a new user. If a referral code is used, both users get rewards. | ❌ No         |
-| POST   | `/users/login`           | Log in and get JWT token. Tracks daily login rewards.                    | ❌ No         |
-| POST   | `/users/logout`          | Log out and blacklist token.                                             | ✅ Yes        |
-| POST   | `/users/reset-password`  | Reset password.                                                          | ❌ No         |
-| POST   | `/users/forgot-password` | Send password reset email.                                               | ❌ No         |
-| POST   | `/users/change-password` | Change password.                                                         | ✅ Yes        |
+| Method | Endpoint                     | Description                                                              | Auth Required |
+| ------ | ---------------------------- | ------------------------------------------------------------------------ | ------------- |
+| POST   | `/api/users/signup`          | Register a new user. If a referral code is used, both users get rewards. | ❌ No         |
+| POST   | `/api/users/login`           | Log in and get JWT token. Tracks daily login rewards.                    | ❌ No         |
+| POST   | `/api/users/logout`          | Log out and blacklist token.                                             | ✅ Yes        |
+| POST   | `/api/users/reset-password`  | Reset password.                                                          | ❌ No         |
+| POST   | `/api/users/forgot-password` | Send password reset email.                                               | ❌ No         |
+| POST   | `/api/users/change-password` | Change password.                                                         | ✅ Yes        |
 
 ### **AWS Integrations**
 
-| Method | Endpoint              | Description                     | Auth Required |
-| ------ | --------------------- | ------------------------------- | ------------- |
-| POST   | `/users/upload-aws`   | Upload files to AWS S3          | ✅ Yes        |
-| POST   | `/users/send-message` | Send a message to AWS SQS queue | ✅ Yes        |
+| Method | Endpoint                  | Description                     | Auth Required |
+| ------ | ------------------------- | ------------------------------- | ------------- |
+| POST   | `/api/users/upload-aws`   | Upload files to AWS S3          | ✅ Yes        |
+| POST   | `/api/users/send-message` | Send a message to AWS SQS queue | ✅ Yes        |
 
 ### **Payment Processing**
 
-| Method | Endpoint                | Description                      | Auth Required |
-| ------ | ----------------------- | -------------------------------- | ------------- |
-| POST   | `/payment/add-card`     | Add a new payment card           | ✅ Yes        |
-| GET    | `/payment/cards`        | List all saved payment cards     | ✅ Yes        |
-| POST   | `/payment/transaction`  | Process a payment transaction    | ✅ Yes        |
+| Method | Endpoint                   | Description                   | Auth Required |
+| ------ | -------------------------- | ----------------------------- | ------------- |
+| POST   | `/api/pay/stripe-customer` | Create a stripe customer      | ✅ Yes        |
+| POST   | `/api/pay/add-card`        | Add a new payment card        | ✅ Yes        |
+| POST   | `/api/pay/make-payment`    | Process a payment transaction | ✅ Yes        |
 
 ---
 
@@ -213,4 +213,4 @@ STRIPE_SECRET_KEY=your_key
 - **Stripe** – Payment Processing
 - **i18n** – Multilingual Support
 - **Swagger** – API Documentation
-- **Firebase** – Notifications (Optional)
+- **Firebase** – Notifications

@@ -389,6 +389,12 @@ const changePassword = async (req, res) => {
         .json({ message: res.t("auth.Incorrect_old_pass") });
     }
 
+    if(oldPassword == newPassword) {
+      return res
+        .status(STATUS_CODES.FORBIDDEN)
+        .json({ message: res.t("auth.Entered_old_pass") })
+    }
+
     // Hash and update new password
     user.password = await bcrypt.hash(newPassword, 10);
 

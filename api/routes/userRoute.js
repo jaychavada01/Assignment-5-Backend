@@ -325,7 +325,7 @@ router.post("/users/reset-password", authController.resetPassword);
 
 /**
  * @swagger
- * /api/users/user-activity:
+ * /api/user/user-activity:
  *   get:
  *     summary: Get user activity history
  *     tags: [User]
@@ -353,6 +353,6 @@ router.post("/users/reset-password", authController.resetPassword);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get("/users/user-activity", authenticate, authController.getUserActivity);
+router.get("/user/user-activity", authenticate, authController.getUserActivity);
 
 module.exports = router;

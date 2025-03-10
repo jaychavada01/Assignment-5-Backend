@@ -16,6 +16,7 @@
     "Invalid_referral": "Invalid referral code!",
     "Invalid_Token": "Invalid or expired token.",
     "Incorrect_old_pass":"Incorrect old password!",
+    "Entered_old_pass": "You have entered a old password! Please enter a new password!",
     "user_activity":"User activity retrieved successfully",
     "unauthorized": "Unauthorized, token missing!",
     "blacklisted_token":"Token is blacklisted!",
