@@ -1,8 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Validator = require("validatorjs");
 const { v4: uuidv4 } = require("uuid");
 const sendEmail = require("../utils/mailer");
-const Validator = require("validatorjs");
 const { Op } = require("sequelize");
 
 const User = require("../models/user");
