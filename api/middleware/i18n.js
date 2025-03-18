@@ -13,7 +13,8 @@ i18n.configure({
   objectNotation: true, // Allows nested translations
   api:{
     __: "t"
-  }
+  },
+  header: "accept-language",
 });
 
 module.exports = i18n;
